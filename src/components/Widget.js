@@ -87,12 +87,6 @@ const Widget = ({ w_data, widgets, setWidgets }) => {
           ) : (
             ''
           )}
-          {w_fullname ? (
-            <p className="widget-item fullname">{w_fullname} </p>
-          ) : (
-            ''
-          )}
-          {w_other ? <p className="widget-item fullname">{w_other} </p> : ''}
 
           {/* Password Curtain */}
           <div className="outer-pswd">
@@ -111,6 +105,12 @@ const Widget = ({ w_data, widgets, setWidgets }) => {
               </CopyToClipboard>
             </div>
           </div>
+          {w_fullname ? (
+            <p className="widget-item fullname">{w_fullname} </p>
+          ) : (
+            ''
+          )}
+          {w_other ? <p className="widget-item other">{w_other} </p> : ''}
         </div>
         <div className="widget-button-panel">
           <button className="btn btn-warning" onClick={onClickEdit}>

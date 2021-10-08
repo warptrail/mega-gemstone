@@ -118,6 +118,24 @@ p.widget-item.title {
   font-size: 28px;
 }
 
+p.widget-item.username {
+  color: #a3af14;
+  font-family: 'Homenaje', sans-serif;
+  font-size: 21px;
+}
+
+p.widget-item.fullname {
+  color: #b2b8c6;
+  font-family: 'Homenaje', sans-serif;
+  font-size: 21px;
+}
+
+p.widget-item.other {
+  font-family: 'Scheherazade New', serif;
+  color: #9f14af;
+  margin-left: 20px;
+}
+
 /* Password Curtain */
 
 .outer-pswd {

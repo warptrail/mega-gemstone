@@ -96,7 +96,7 @@ const WidgetGallery = () => {
         console.log(res);
         const pdfBlob = new Blob([res.data], { type: 'application/pdf' });
         console.log(res.data);
-        saveAs(pdfBlob, 'newPdf.pdf');
+        saveAs(pdfBlob, 'tractor-specs.pdf');
       });
   };
 
