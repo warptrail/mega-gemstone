@@ -1,0 +1,15 @@
+font-family: 'Abhaya Libre', serif;
+font-family: 'Averia Gruesa Libre', cursive;
+font-family: 'Averia Serif Libre', cursive;
+font-family: 'Crimson Text', serif;
+font-family: 'East Sea Dokdo', cursive;
+font-family: 'Homenaje', sans-serif;
+font-family: 'Inika', serif;
+font-family: 'Montez', cursive;
+font-family: 'Montserrat Subrayada', sans-serif;
+font-family: 'Mountains of Christmas', cursive;
+font-family: 'Noto Rashi Hebrew', serif;
+font-family: 'Plaster', cursive;
+font-family: 'Revalia', cursive;
+font-family: 'Scheherazade New', serif;
+font-family: 'Syne Mono', monospace;
