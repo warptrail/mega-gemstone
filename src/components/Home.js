@@ -4,7 +4,7 @@ import Counter from './Counter';
 const Home = () => {
   return (
     <div>
-      <h2>This is le home page</h2>
+      <h2>Forge your Path</h2>
       <Counter />
     </div>
   );

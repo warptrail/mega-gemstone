@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
+import backgroundImg from './img/japanese-gardens.png';
+
 import './App.css';
 
 import {
@@ -61,76 +63,85 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <Router>
-        <header>
-          <h1 className="h1 display-1 px-3">Welcome to the Cryochamber</h1>
-          <Nav
-            isAuthenticated={isAuthenticated}
-            setAuth={setAuth}
-            setValidityCheck={setValidityCheck}
-          />
-        </header>
-        <Switch>
-          <Route
-            exact
-            path="/"
-            render={(props) =>
-              !isAuthenticated ? (
-                <Home {...props} />
-              ) : (
-                <Redirect to="/dashboard" />
-              )
-            }
-          />
+    <div
+      className="App"
+      style={{
+        background: `url(${backgroundImg})`,
+        backgroundSize: 'cover',
+        backgroundAttachment: 'fixed',
+      }}
+    >
+      <div className="app-container">
+        <Router>
+          <header>
+            <h1 className="h1 display-1 px-3">Welcome to the Cryochamber</h1>
+            <Nav
+              isAuthenticated={isAuthenticated}
+              setAuth={setAuth}
+              setValidityCheck={setValidityCheck}
+            />
+          </header>
+          <Switch>
+            <Route
+              exact
+              path="/"
+              render={(props) =>
+                !isAuthenticated ? (
+                  <Home {...props} />
+                ) : (
+                  <Redirect to="/dashboard" />
+                )
+              }
+            />
 
-          <Route
-            exact
-            path="/login"
-            render={(props) =>
-              !isAuthenticated ? (
-                <Login
-                  {...props}
-                  setAuth={setAuth}
-                  setValidityCheck={setValidityCheck}
-                />
-              ) : (
-                <Redirect to="/dashboard" />
-              )
-            }
-          />
-          <Route
-            exact
-            path="/register"
-            render={(props) =>
-              !isAuthenticated ? (
-                <Register
-                  {...props}
-                  setAuth={setAuth}
-                  setValidityCheck={setValidityCheck}
-                />
-              ) : (
-                <Redirect to="/login" />
-              )
-            }
-          />
-          <Route
-            exact
-            path="/dashboard"
-            render={(props) =>
-              isAuthenticated ? (
-                <Dashboard
-                  {...props}
-                  setAuth={setAuth}
-                  setValidityCheck={setValidityCheck}
-                />
-              ) : (
-                <Redirect to="/login" />
-              )
-            }
-          />
-        </Switch>
-      </Router>
+            <Route
+              exact
+              path="/login"
+              render={(props) =>
+                !isAuthenticated ? (
+                  <Login
+                    {...props}
+                    setAuth={setAuth}
+                    setValidityCheck={setValidityCheck}
+                  />
+                ) : (
+                  <Redirect to="/dashboard" />
+                )
+              }
+            />
+            <Route
+              exact
+              path="/register"
+              render={(props) =>
+                !isAuthenticated ? (
+                  <Register
+                    {...props}
+                    setAuth={setAuth}
+                    setValidityCheck={setValidityCheck}
+                  />
+                ) : (
+                  <Redirect to="/login" />
+                )
+              }
+            />
+            <Route
+              exact
+              path="/dashboard"
+              render={(props) =>
+                isAuthenticated ? (
+                  <Dashboard
+                    {...props}
+                    setAuth={setAuth}
+                    setValidityCheck={setValidityCheck}
+                  />
+                ) : (
+                  <Redirect to="/login" />
+                )
+              }
+            />
+          </Switch>
+        </Router>
+      </div>
     </div>
   );
 }

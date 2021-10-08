@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { saveAs } from 'file-saver';
 
 import WidgetApiService from '../services/widget-api-service';
+import { XORCipher } from '../services/xor';
+import goldenSpearOfJustice from '../services/magic-text';
 
 // * Components
 import WidgetSearch from './WidgetSearch';
@@ -10,6 +14,7 @@ import Widget from './Widget';
 const WidgetGallery = () => {
   const [widgets, setWidgets] = useState([]);
   const [search, setSearch] = useState('');
+  const [reportData, setReportData] = useState([]);
 
   const fetchWidgets = async () => {
     const res = await WidgetApiService.getWidgets();
@@ -67,6 +72,34 @@ const WidgetGallery = () => {
     return jsxWidgets;
   };
 
+  const createAndDownloadPdf = () => {
+    const pdfData = widgets.map((w) => {
+      const encryptedPswd = w.w_pswd;
+      const pdfDataItem = {
+        service: w.w_title,
+        email: w.w_email,
+        username: w.w_username,
+        pswd: XORCipher.decode(goldenSpearOfJustice, encryptedPswd),
+      };
+      return pdfDataItem;
+    });
+
+    axios
+      .post('http://localhost:8082/api/widget/create-pdf', pdfData)
+      .then(() =>
+        axios.get('http://localhost:8082/api/widget/fetch-pdf', {
+          responseType: 'blob',
+          headers: { token: sessionStorage.getItem('token') },
+        })
+      )
+      .then((res) => {
+        console.log(res);
+        const pdfBlob = new Blob([res.data], { type: 'application/pdf' });
+        console.log(res.data);
+        saveAs(pdfBlob, 'newPdf.pdf');
+      });
+  };
+
   return (
     <>
       <hr />
@@ -74,6 +107,14 @@ const WidgetGallery = () => {
       <WidgetSearch handleInput={handleSearchInput} search={search} />
       <WidgetCreateForm widgets={widgets} setWidgets={setWidgets} />
       <ul className="widgets">{renderWidgets()}</ul>
+      <footer>
+        <button
+          className="btn btn-primary report-btn"
+          onClick={createAndDownloadPdf}
+        >
+          Generate Report
+        </button>
+      </footer>
     </>
   );
 };

@@ -17,11 +17,19 @@ body {
 .App {
   text-align: center;
   color: #07a953;
+  height: 100vh;
+}
+
+.app-container {
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: #151515;
+  height: 100vh;
 }
 
 nav ul {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   background-color: #53238e;
   padding: 10px 0;
 }
@@ -285,4 +293,8 @@ input.pswd::placeholder {
 
 .pswd-edit:focus {
   color: #b0304b !important;
+}
+
+.report-btn {
+  margin-top: 25px;
 }
