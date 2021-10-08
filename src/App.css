@@ -17,14 +17,14 @@ body {
 .App {
   text-align: center;
   color: #07a953;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .app-container {
   max-width: 600px;
   margin: 0 auto;
   background-color: #151515;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 nav ul {

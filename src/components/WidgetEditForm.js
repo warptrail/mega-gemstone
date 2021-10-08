@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import WidgetApiService from '../services/widget-api-service';
+import { XORCipher } from '../services/xor';
+import goldenSpearOfJustice from '../services/magic-text';
 
 const WidgetEditForm = ({
   updateData,
@@ -25,11 +27,19 @@ const WidgetEditForm = ({
     setInputs({ ...inputs, [e.target.name]: e.target.value });
   };
 
+  console.log(inputs);
+
   const onFormSubmit = async (e) => {
     e.preventDefault();
+    const decodedPswd = inputs.pswd;
+    const encodedPswd = XORCipher.encode(goldenSpearOfJustice, decodedPswd);
+    const encodePswdForUpdate = {
+      ...inputs,
+      pswd: encodedPswd,
+    };
 
     const patchWidget = await WidgetApiService.updateWidget(
-      inputs,
+      encodePswdForUpdate,
       updateData.w_uid
     );
 

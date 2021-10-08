@@ -24,17 +24,22 @@ const Widget = ({ w_data, widgets, setWidgets }) => {
     w_username,
   } = w_data;
 
+  const encryptedPswd = w_pswd;
+  const decryptedPswd = XORCipher.decode(goldenSpearOfJustice, encryptedPswd);
+
   const formatDataForUpdate = {
     w_uid,
     title: w_title,
     email: w_email,
-    pswd: w_pswd,
+    pswd: decryptedPswd,
     username: w_username,
     fullname: w_fullname,
     other: w_other,
     logo: w_logo,
     color: w_color,
   };
+
+  console.log(formatDataForUpdate);
 
   // * On delete button --> delete the widget from database
 
@@ -71,8 +76,6 @@ const Widget = ({ w_data, widgets, setWidgets }) => {
   const renderDefault = () => {
     // Need to decrypt the password to display correctly
 
-    const encryptedPswd = w_pswd;
-    const decryptedPswd = XORCipher.decode(goldenSpearOfJustice, encryptedPswd);
     return (
       <>
         <div className="widget-info">
