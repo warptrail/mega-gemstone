@@ -4,6 +4,7 @@ import AuthService from '../services/auth-api-service';
 
 import Countdown from './Countdown';
 import WidgetGallery from './WidgetGallery';
+import ReadmeLink from './ReadmeLink';
 
 const Dashboard = ({ setAuth, setValidityCheck }) => {
   const [username, setUsername] = useState('');
@@ -68,6 +69,7 @@ const Dashboard = ({ setAuth, setValidityCheck }) => {
       </button>
 
       <WidgetGallery userUid={userUid} />
+      <ReadmeLink spaceAbove={true} />
     </div>
   );
 };

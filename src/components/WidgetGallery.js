@@ -10,20 +10,20 @@ import goldenSpearOfJustice from '../services/magic-text';
 import WidgetSearch from './WidgetSearch';
 import WidgetCreateForm from './WidgetCreateForm';
 import Widget from './Widget';
+import Sort from './Sort';
 
 const WidgetGallery = () => {
   const [widgets, setWidgets] = useState([]);
   const [search, setSearch] = useState('');
-  const [reportData, setReportData] = useState([]);
 
-  const fetchWidgets = async () => {
-    const res = await WidgetApiService.getWidgets();
+  const fetchWidgets = async (byName) => {
+    const res = await WidgetApiService.getWidgets(byName);
     setWidgets(res);
   };
 
   useEffect(() => {
     // * On page load, fetch all widgets
-    fetchWidgets();
+    fetchWidgets(false);
   }, []);
 
   // * Render the widgets dependent on the search string
@@ -72,8 +72,10 @@ const WidgetGallery = () => {
     return jsxWidgets;
   };
 
-  const createAndDownloadPdf = () => {
-    const pdfData = widgets.map((w) => {
+  const createAndDownloadPdf = async () => {
+    const widgetsByName = await WidgetApiService.getWidgets(true);
+
+    const pdfData = widgetsByName.map((w) => {
       const encryptedPswd = w.w_pswd;
       const pdfDataItem = {
         service: w.w_title,
@@ -106,6 +108,7 @@ const WidgetGallery = () => {
       <h3>Widget Control Panel</h3>
       <WidgetSearch handleInput={handleSearchInput} search={search} />
       <WidgetCreateForm widgets={widgets} setWidgets={setWidgets} />
+      <Sort fetchWidgets={fetchWidgets} />
       <ul className="widgets">{renderWidgets()}</ul>
       <footer>
         <button

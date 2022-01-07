@@ -19,7 +19,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "launch": "npx serve -s build",
+    "launch": "npx serve -l 5050 -s build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

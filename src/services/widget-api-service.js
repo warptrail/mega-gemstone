@@ -1,7 +1,12 @@
 const API_ENDPOINT = 'http://localhost:8082/api';
 const WidgetApiService = {
-  async getWidgets() {
-    const res = await fetch(`${API_ENDPOINT}/widget/all`, {
+  async getWidgets(byName) {
+    let nameUrl = '';
+    if (byName) {
+      nameUrl = '/name';
+    }
+
+    const res = await fetch(`${API_ENDPOINT}/widget/all${nameUrl}`, {
       headers: {
         token: sessionStorage.token,
       },
@@ -13,6 +18,7 @@ const WidgetApiService = {
 
     return parseResponse;
   },
+
   async getWidget(id) {
     const res = await fetch(`${API_ENDPOINT}/widget/single/${id}`);
     return await (!res.ok

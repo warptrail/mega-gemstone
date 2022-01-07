@@ -52,8 +52,12 @@ button {
 }
 nav ul li a {
   color: white;
-  /* padding: 10px; */
+  padding: 10px;
   text-decoration: none;
+}
+
+nav ul li a:hover {
+  color: #08f134;
 }
 
 nav ul li button {
@@ -209,10 +213,35 @@ p.widget-item.pswd {
   width: 75%;
 }
 
+.form-control {
+  background-color: black;
+  color: #7ec62b;
+  font-size: 20px;
+  border: 1px solid rgba(47, 144, 224, 1);
+}
+
+.form-control:focus {
+  background-color: black;
+  color: #7ec62b;
+  font-size: 20px;
+}
+
+.form-control::placeholder {
+  color: #b2b8c6;
+}
+
 .searchbar {
   padding: 10px;
   max-width: 500px;
   margin: 10px auto;
+}
+
+.home-logo-frame {
+  padding: 0px 40px;
+}
+
+.home-logo-frame img {
+  width: 100%;
 }
 
 .create-widget-form input {
@@ -315,4 +344,50 @@ input.pswd::placeholder {
 
 .report-btn {
   margin-top: 25px;
+  background-color: #5c1da5;
+  border: none;
+  padding: 10px 20px;
+}
+
+.homeTitle {
+  text-align: left;
+  padding: 20px 12px 14px 40px;
+}
+
+.homeText {
+  text-align: left;
+  font-size: 22px;
+  padding: 20px 12px 14px 40px;
+}
+
+.readmeLink {
+  padding: 10px 20px;
+  display: inline-block;
+  border: none;
+  border-radius: 10px;
+  padding: 1rem 2rem;
+  margin: 0;
+  text-decoration: none;
+  background: #0069ed;
+  color: #ffffff;
+  font-family: sans-serif;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  text-align: center;
+  transition: all 250ms ease-in-out, transform 150ms ease;
+}
+
+.readmeLink:hover {
+  background-color: #08f134;
+  color: black;
+}
+
+.spaceAbove {
+  margin-top: 28px;
+  margin-bottom: 30px;
+}
+
+.sort-bar button {
+  margin: 0 20px;
 }
