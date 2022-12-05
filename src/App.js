@@ -1,25 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import backgroundImg from './img/japanese-gardens.png';
 
 import './App.css';
 
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
-import TokenService from './services/token-service';
-import IdleService from './services/idle-service';
 import AuthService from './services/auth-api-service';
+import IdleService from './services/idle-service';
+import TokenService from './services/token-service';
 
-import Home from './components/Home';
 import Dashboard from './components/Dashboard';
+import Home from './components/Home';
 import Login from './components/Login';
-import Register from './components/Register';
 import Nav from './components/Nav';
+import Register from './components/Register';
 
 function App() {
   // This state stores if the user is authenticated or not
@@ -72,75 +67,67 @@ function App() {
       }}
     >
       <div className="app-container">
-        <Router>
-          <header>
-            <h1 className="h1 display-1 px-3">Welcome to the Cryochamber</h1>
-            <Nav
-              isAuthenticated={isAuthenticated}
-              setAuth={setAuth}
-              setValidityCheck={setValidityCheck}
-            />
-          </header>
-          <Switch>
-            <Route
-              exact
-              path="/"
-              render={(props) =>
-                !isAuthenticated ? (
-                  <Home {...props} />
-                ) : (
-                  <Redirect to="/dashboard" />
-                )
-              }
-            />
+        <header>
+          <h1 className="h1 display-1 px-3">Welcome to the Cryochamber</h1>
+          <Nav
+            isAuthenticated={isAuthenticated}
+            setAuth={setAuth}
+            setValidityCheck={setValidityCheck}
+          />
+        </header>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              !isAuthenticated ? (
+                <Home isAuthenticated />
+              ) : (
+                <Login setAuth={setAuth} setValidityCheck={setValidityCheck} />
+              )
+            }
+          />
 
-            <Route
-              exact
-              path="/login"
-              render={(props) =>
-                !isAuthenticated ? (
-                  <Login
-                    {...props}
-                    setAuth={setAuth}
-                    setValidityCheck={setValidityCheck}
-                  />
-                ) : (
-                  <Redirect to="/dashboard" />
-                )
-              }
-            />
-            <Route
-              exact
-              path="/register"
-              render={(props) =>
-                !isAuthenticated ? (
-                  <Register
-                    {...props}
-                    setAuth={setAuth}
-                    setValidityCheck={setValidityCheck}
-                  />
-                ) : (
-                  <Redirect to="/login" />
-                )
-              }
-            />
-            <Route
-              exact
-              path="/dashboard"
-              render={(props) =>
-                isAuthenticated ? (
-                  <Dashboard
-                    {...props}
-                    setAuth={setAuth}
-                    setValidityCheck={setValidityCheck}
-                  />
-                ) : (
-                  <Redirect to="/login" />
-                )
-              }
-            />
-          </Switch>
-        </Router>
+          <Route
+            path="/login"
+            element={
+              !isAuthenticated ? (
+                <Login setAuth={setAuth} setValidityCheck={setValidityCheck} />
+              ) : (
+                <Navigate to="/dashboard" />
+              )
+            }
+          />
+
+          <Route
+            path="/register"
+            element={
+              !isAuthenticated ? (
+                <Register
+                  setAuth={setAuth}
+                  setValidityCheck={setValidityCheck}
+                />
+              ) : (
+                <Navigate to="/dashboard" />
+              )
+            }
+          />
+
+          <Route
+            path="/dashboard"
+            element={
+              isAuthenticated ? (
+                <Dashboard
+                  setAuth={setAuth}
+                  setValidityCheck={setValidityCheck}
+                />
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
+
+          <Route path="*" element={<h1>404 Page Not Found</h1>} />
+        </Routes>
       </div>
     </div>
   );
